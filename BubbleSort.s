@@ -1,58 +1,54 @@
-num         dcd     5
-arr         dcd     4, 2, 1, 3, 6
+num         dcd     10
+arr         dcd     12, 7, 4, 2, -1, 0, 6, 10, 2, 14
 
-            mov     r0, #num
+            mov     r0, #num; size array
             ldr     r0, [r0]
-            mov     r1, #arr
-            mov     r2, #arr
-            mov     r3, #0; temp
+            sub     r0, r0, #1
+            mov     r1, #arr; array
+            mov     r4, #0; i
 
 loop        
-            cmp     r0, #1
+            cmp     r4, r0
             beq     endloop
-            mov     r4, #0
-            mov     r6, r0
-            sub     r6, r6, #1
-            mov     r5, #num
-            ldr     r5, [r5]
+            mov     r3, #num; num iteration second loop
+            mov     r2, r1; set second pointer equal to first pointer
+            ldr     r3, [r3]
+            sub     r3, r3, #1
+            sub     r3, r3, r4
+            mov     r5, #0; j
 swapLoop    
-            cmp     r5, r6
-            beq     decrementI
-            ldr     r7, [r1]
-            add     r2, r2, #4
-            ldr     r8, [r2]
-            cmp     r7, r8
-            bgt     swap
-
-endSwap     
-            sub     r5, r5, #1
+            cmp     r5, r3
+            beq     incrementI
+            add     r5, r5, #1; increment j
+            ldr     r6, [r1]; element j
+            add     r2, r2, #4; increment second pointer
+            ldr     r7, [r2]; element j+1
+            cmp     r6, r7
+            bgt     swap; blt in descending order
             b       swapLoop
 
-decrementI  
-            sub     r0, r0, #1
+incrementI  
+            add     r4, r4, #1
+            add     r1, r1, #4; increment first pointer
             b       loop
 
 swap        
-            mov     r12, r8
-            mov     r12, r7
-            str     r8, [r1]
-            str     r7, [r2]
+            str     r7, [r1]
+            str     r6, [r2]
 
-            b       endSwap
+            b       swapLoop
 
 endloop     
 
-            mov     r9, #num
-            ldr     r9, [r9]
-            mov     r10, #arr
+            mov     r8, #num
+            ldr     r8, [r8]
+            mov     r9, #arr
 controlSort 
-            cmp     r9, #0
+            cmp     r8, #0
             beq     endExe
-            ldr     r11, [r10]
-            add     r10, r10, #4
-            sub     r9, r9, #1
+            ldr     r10, [r9]; final array value
+            add     r9, r9, #4
+            sub     r8, r8, #1
             b       controlSort
-
+            
 endExe      
-
-
