@@ -7,7 +7,7 @@ loop
          cmp     r0, #0
          beq     end_loop
          ldr     r2, [r1]
-         orr     r2, r2, #0xff00
+         orr     r2, r2, #0xff00; destinazione del valore, valore a cui applicare la mask, mask
          str     r2, [r1]
          add     r1, r1, #4
          sub     r0, r0, #1
@@ -33,3 +33,4 @@ endd
          ;orr    r0, r0, #0x000000A2
          ;orr    r0, r0, #4
          ;and    r0, r0, #0xF
+
