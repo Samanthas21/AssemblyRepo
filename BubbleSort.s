@@ -2,7 +2,7 @@ num         dcd     10
 arr         dcd     12, 7, 4, 2, -1, 0, 6, 10, 2, 14
 
             mov     r0, #num; size array
-            ldr     r0, [r0]
+            ldr     r0, [r0];load
             sub     r0, r0, #1
             mov     r1, #arr; array
             mov     r4, #0; i
@@ -33,7 +33,7 @@ incrementI
             b       loop
 
 swap        
-            str     r7, [r1]
+            str     r7, [r1];store
             str     r6, [r2]
 
             b       swapLoop
